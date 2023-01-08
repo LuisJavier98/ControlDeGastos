@@ -16,6 +16,9 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
     if (Totales.length !== 0) {
       settotalGastado(Totales.reduce((a, b) => a + b))
     }
+    else {
+      settotalGastado(0)
+    }
   }, [gastos])
 
   console.log(totalGastado)
