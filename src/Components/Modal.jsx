@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import CerrarBtn from '../img/cerrar.svg'
 import Mensaje from './Mensaje'
+import { generarId } from '../Helpers/index'
+
+
 const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgastos, mensaje, setmessage }) => {
   const ocultarModal = () => {
     setanimarModal(false)
@@ -18,8 +21,10 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
       e.target[2].value = 'seleccione'
     }
     const objetoGastos = {
+      id: generarId(),
+      fecha: new Date(),
       nombreGasto: e.target[0].value,
-      catidad: e.target[1].value,
+      cantidad: Number(e.target[1].value),
       categoria: e.target[2].value
     }
     if (isNaN(e.target[0].value) && e.target[2].value !== 'seleccione') {
