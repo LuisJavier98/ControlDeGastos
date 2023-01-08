@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ControlPresupuesto from './ControlPresupuesto'
 import NuevoPresupuesto from './NuevoPresupuesto'
 
-const Header = ({ Change, setChange, mensaje, setmessage }) => {
+const Header = ({ Change, setChange, mensaje, setmessage, gastos }) => {
   const [presupuesto, setpresupuesto] = useState(0)
   const handleChange = e => {
     e.preventDefault()
@@ -25,7 +25,7 @@ const Header = ({ Change, setChange, mensaje, setmessage }) => {
       <h1>Panificador de Gastos</h1>{
         Change ?
           <NuevoPresupuesto setpresupuesto={setpresupuesto} mensaje={mensaje} handleChange={handleChange} /> :
-          <ControlPresupuesto presupuesto={presupuesto} />}
+          <ControlPresupuesto presupuesto={presupuesto} gastos={gastos} />}
     </header>
   )
 }

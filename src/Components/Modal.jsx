@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CerrarBtn from '../img/cerrar.svg'
 import Mensaje from './Mensaje'
 import { generarId } from '../Helpers/index'
 
 
-const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgastos, mensaje, setmessage }) => {
+const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgastos, mensaje, setmessage, editarGasto, seteditarGasto }) => {
   const ocultarModal = () => {
     setanimarModal(false)
     setTimeout(() => {
@@ -28,12 +28,34 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
       categoria: e.target[2].value
     }
     if (isNaN(e.target[0].value) && e.target[2].value !== 'seleccione') {
-      setgastos([...gastos, objetoGastos])
-      clear()
-      setTimeout(() => {
-        setisModalActive(false);
-        setmessage('')
-      }, 500);
+      if (Object.keys(editarGasto).length === 0) {
+        setgastos([...gastos, objetoGastos])
+        clear()
+        setTimeout(() => {
+          setisModalActive(false);
+          setmessage('')
+        }, 500);
+      } else {
+        setgastos(gastos.map(gasto => {
+          if (editarGasto == gasto) {
+            return {
+              fecha: new Date(),
+              nombreGasto: e.target[0].value,
+              cantidad: Number(e.target[1].value),
+              categoria: e.target[2].value
+            }
+          }
+          else {
+            return gasto
+          }
+        }))
+        clear()
+        setTimeout(() => {
+          setisModalActive(false);
+          setmessage('')
+        }, 500);
+        seteditarGasto({})
+      }
     }
     else if (e.target[2].value == 'seleccione') {
       setmessage('Seleccione una categoria')
@@ -42,7 +64,15 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
       setmessage('El nombre del gasto tiene que ser un String')
     }
   }
-  console.log(gastos)
+  const Datos = useRef()
+
+  useEffect(() => {
+    if (Object.keys(editarGasto).length !== 0) {
+      Datos.current[0].value = editarGasto.nombreGasto
+      Datos.current[1].value = editarGasto.cantidad
+      Datos.current[2].value = editarGasto.categoria
+    }
+  }, [editarGasto])
 
 
   return (
@@ -50,7 +80,7 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
       <div className='cerrar-modal'>
         <img src={CerrarBtn} alt="Cerrar modal" onClick={ocultarModal} />
       </div>
-      <form onSubmit={obtenerGastos} className={`formulario ${animarModal ? 'animar' : 'cerrar'}`} action="">
+      <form ref={Datos} onSubmit={obtenerGastos} className={`formulario ${animarModal ? 'animar' : 'cerrar'}`} action="">
         <legend>Nuevo Gasto</legend>
         {mensaje && <Mensaje tipo='error'>{mensaje}</Mensaje>}
         <div className='campo'>
@@ -68,13 +98,16 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
             <option value="ahorro">Ahorro</option>
             <option value="comida">Comida</option>
             <option value="casa">Casa</option>
-            <option value="gastos varios">Gastos Varios</option>
+            <option value="gastos">Gastos Varios</option>
             <option value="ocio">Ocio</option>
             <option value="salud">Salud</option>
             <option value="suscripciones">Suscripciones</option>
           </select>
-        </div>
-        <input type="submit" value='Añadir Gasto' />
+        </div>{
+          Object.keys(editarGasto).length === 0 ?
+            <input type="submit" value='Añadir Gasto' /> :
+            <input type="submit" value='Editar Gasto' />
+        }
       </form>
 
     </div >

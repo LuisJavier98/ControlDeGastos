@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const ControlPresupuesto = ({ presupuesto }) => {
+const ControlPresupuesto = ({ presupuesto, gastos }) => {
+  const [totalGastado, settotalGastado] = useState(0)
+
 
   const formatearCantidad = (presupuesto) => {
     return presupuesto.toLocaleString('en-US', {
@@ -8,6 +10,17 @@ const ControlPresupuesto = ({ presupuesto }) => {
       currency: 'USD'
     })
   }
+
+  const Totales = gastos.map(gasto => gasto.cantidad)
+  useEffect(() => {
+    if (Totales.length !== 0) {
+      settotalGastado(Totales.reduce((a, b) => a + b))
+    }
+  }, [gastos])
+
+  console.log(totalGastado)
+
+
   return (
     <div className='contenedor-presupuesto contenedor sombra dos-columnas' >
       <div>
@@ -18,10 +31,10 @@ const ControlPresupuesto = ({ presupuesto }) => {
           <span>Presupuesto:</span>{formatearCantidad(presupuesto)}
         </p>
         <p>
-          <span>Disponible:</span>{formatearCantidad(0)}
+          <span>Disponible:</span>{formatearCantidad(presupuesto - totalGastado)}
         </p>
         <p>
-          <span>Gastado:</span>{formatearCantidad(0)}
+          <span>Gastado:</span>{formatearCantidad(totalGastado)}
         </p>
       </div>
     </div>

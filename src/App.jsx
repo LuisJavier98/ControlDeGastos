@@ -2,7 +2,6 @@ import { useState } from 'react'
 import './App.css'
 import Header from './Components/Header'
 import ListadoGastos from './Components/ListadoGastos'
-import Mensaje from './Components/Mensaje'
 import Modal from './Components/Modal'
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
 
@@ -13,6 +12,9 @@ function App() {
   const [animarModal, setanimarModal] = useState(false)
   const [gastos, setgastos] = useState([])
   const [mensaje, setmessage] = useState()
+  const [editarGasto, seteditarGasto] = useState({})
+  const [eliminarGasto, seteliminarGasto] = useState({})
+
 
   const handleNuevoGasto = () => {
     setisModalActive(true)
@@ -21,12 +23,12 @@ function App() {
     }, 300);
   }
   return (
-    <div className="App">
-      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} />
+    <div className={isModalActive ? 'fijar' : ''}>
+      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} />
       {!Change && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} />
+            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} seteliminarGasto={seteliminarGasto} setgastos={setgastos} />
           </main>
           <div className='nuevo-gasto'>
             <img src={IconoNuevoGasto} alt="Icono nuevo gasto" onClick={handleNuevoGasto} />
@@ -35,7 +37,7 @@ function App() {
       )}
 
       {
-        isModalActive && <Modal setisModalActive={setisModalActive} animarModal={animarModal} setanimarModal={setanimarModal} gastos={gastos} setgastos={setgastos} mensaje={mensaje} setmessage={setmessage} />
+        isModalActive && <Modal setisModalActive={setisModalActive} animarModal={animarModal} setanimarModal={setanimarModal} gastos={gastos} setgastos={setgastos} mensaje={mensaje} setmessage={setmessage} editarGasto={editarGasto} seteditarGasto={seteditarGasto} />
       }
     </div>
   )
