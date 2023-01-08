@@ -4,14 +4,17 @@ import Mensaje from './Mensaje'
 import { generarId } from '../Helpers/index'
 
 
-const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgastos, mensaje, setmessage, editarGasto, seteditarGasto }) => {
+const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgastos, mensaje, setmessage, editarGasto, seteditarGasto, presupuesto, totalGastado }) => {
   const ocultarModal = () => {
     setanimarModal(false)
     setTimeout(() => {
       setisModalActive(false)
       setmessage('')
+      seteditarGasto({})
     }, 500);
   }
+  console.log(totalGastado)
+  console.log(presupuesto)
 
   const obtenerGastos = e => {
     e.preventDefault()
@@ -28,33 +31,39 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
       categoria: e.target[2].value
     }
     if (isNaN(e.target[0].value) && e.target[2].value !== 'seleccione') {
-      if (Object.keys(editarGasto).length === 0) {
-        setgastos([...gastos, objetoGastos])
-        clear()
-        setTimeout(() => {
-          setisModalActive(false);
-          setmessage('')
-        }, 500);
-      } else {
-        setgastos(gastos.map(gasto => {
-          if (editarGasto == gasto) {
-            return {
-              fecha: new Date(),
-              nombreGasto: e.target[0].value,
-              cantidad: Number(e.target[1].value),
-              categoria: e.target[2].value
+
+      if (presupuesto >= (totalGastado + Number(e.target[1].value))) {
+        if (Object.keys(editarGasto).length === 0) {
+          setgastos([...gastos, objetoGastos])
+          clear()
+          setTimeout(() => {
+            setisModalActive(false);
+            setmessage('')
+          }, 500);
+        } else {
+          setgastos(gastos.map(gasto => {
+            if (editarGasto == gasto) {
+              return {
+                fecha: new Date(),
+                nombreGasto: e.target[0].value,
+                cantidad: Number(e.target[1].value),
+                categoria: e.target[2].value
+              }
             }
-          }
-          else {
-            return gasto
-          }
-        }))
-        clear()
-        setTimeout(() => {
-          setisModalActive(false);
-          setmessage('')
-        }, 500);
-        seteditarGasto({})
+            else {
+              return gasto
+            }
+          }))
+          clear()
+          setTimeout(() => {
+            setisModalActive(false);
+            setmessage('')
+          }, 500);
+          seteditarGasto({})
+        }
+      }
+      else {
+        setmessage('La cantidad introducida sobrepasa el presupuesto ')
       }
     }
     else if (e.target[2].value == 'seleccione') {

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar'
 import "react-circular-progressbar/dist/styles.css"
 
-const ControlPresupuesto = ({ presupuesto, gastos }) => {
-  const [totalGastado, settotalGastado] = useState(0)
+const ControlPresupuesto = ({ presupuesto, gastos, totalGastado, settotalGastado }) => {
+
 
 
   const formatearCantidad = (presupuesto) => {
@@ -32,7 +32,7 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
       <div>
         <CircularProgressbar
           value={(totalGastado / presupuesto) * 100}
-          text={`${((totalGastado / presupuesto) * 100).toFixed(2)}%`}
+          text={`${((totalGastado / presupuesto) * 100).toFixed(2)}% Gastado`}
           styles={buildStyles({
             background: '#181818',
             textColor: 'red',

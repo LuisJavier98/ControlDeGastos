@@ -13,7 +13,8 @@ function App() {
   const [gastos, setgastos] = useState([])
   const [mensaje, setmessage] = useState()
   const [editarGasto, seteditarGasto] = useState({})
-  const [eliminarGasto, seteliminarGasto] = useState({})
+  const [presupuesto, setpresupuesto] = useState(0)
+  const [totalGastado, settotalGastado] = useState(0)
 
 
   const handleNuevoGasto = () => {
@@ -24,11 +25,11 @@ function App() {
   }
   return (
     <div className={isModalActive ? 'fijar' : ''}>
-      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} />
+      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} presupuesto={presupuesto} setpresupuesto={setpresupuesto} totalGastado={totalGastado} settotalGastado={settotalGastado} />
       {!Change && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} seteliminarGasto={seteliminarGasto} setgastos={setgastos} />
+            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} />
           </main>
           <div className='nuevo-gasto'>
             <img src={IconoNuevoGasto} alt="Icono nuevo gasto" onClick={handleNuevoGasto} />
@@ -37,7 +38,7 @@ function App() {
       )}
 
       {
-        isModalActive && <Modal setisModalActive={setisModalActive} animarModal={animarModal} setanimarModal={setanimarModal} gastos={gastos} setgastos={setgastos} mensaje={mensaje} setmessage={setmessage} editarGasto={editarGasto} seteditarGasto={seteditarGasto} />
+        isModalActive && <Modal setisModalActive={setisModalActive} animarModal={animarModal} setanimarModal={setanimarModal} gastos={gastos} setgastos={setgastos} mensaje={mensaje} setmessage={setmessage} editarGasto={editarGasto} seteditarGasto={seteditarGasto} presupuesto={presupuesto} totalGastado={totalGastado} />
       }
     </div>
   )
