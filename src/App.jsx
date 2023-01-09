@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Filtros from './Components/Filtros'
 import Header from './Components/Header'
 import ListadoGastos from './Components/ListadoGastos'
 import Modal from './Components/Modal'
@@ -10,11 +11,12 @@ function App() {
   const [Change, setChange] = useState(true)
   const [isModalActive, setisModalActive] = useState(false)
   const [animarModal, setanimarModal] = useState(false)
-  const [gastos, setgastos] = useState([])
+  const [gastos, setgastos] = useState(JSON.parse(localStorage.getItem('gastos')) ?? [])
   const [mensaje, setmessage] = useState()
   const [editarGasto, seteditarGasto] = useState({})
-  const [presupuesto, setpresupuesto] = useState(0)
+  const [presupuesto, setpresupuesto] = useState(localStorage.getItem('presupuesto') ?? 0)
   const [totalGastado, settotalGastado] = useState(0)
+  const [filtro, setfiltro] = useState('todos')
 
 
   const handleNuevoGasto = () => {
@@ -23,33 +25,29 @@ function App() {
       setanimarModal(true)
     }, 300);
   }
+  console.log(gastos, filtro)
+
 
   useEffect(() => {
-    if (localStorage.getItem('change') == false) {
+    localStorage.setItem('presupuesto', presupuesto ?? 0)
+    localStorage.setItem('gastos', JSON.stringify(gastos))
+  }, [presupuesto, gastos])
+
+  useEffect(() => {
+    const presupuestoLS = Number(localStorage.getItem('presupuesto'))
+    if (presupuestoLS > 0) {
       setChange(false)
     }
-    console.log(Change)
-
   }, [])
-
-  useEffect(() => {
-    localStorage.setItem('presupuesto', presupuesto)
-    localStorage.setItem('totalGastado', totalGastado)
-    localStorage.setItem('change', Change)
-
-
-
-  }, [presupuesto, Change, totalGastado])
-
-
 
   return (
     <div className={isModalActive ? 'fijar' : ''}>
-      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} presupuesto={presupuesto} setpresupuesto={setpresupuesto} totalGastado={totalGastado} settotalGastado={settotalGastado} />
+      <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} setgastos={setgastos} presupuesto={presupuesto} setpresupuesto={setpresupuesto} totalGastado={totalGastado} settotalGastado={settotalGastado} />
       {!Change && (
         <>
           <main>
-            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} />
+            <Filtros filtro={filtro} setfiltro={setfiltro} />
+            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} filtro={filtro} />
           </main>
           <div className='nuevo-gasto'>
             <img src={IconoNuevoGasto} alt="Icono nuevo gasto" onClick={handleNuevoGasto} />
