@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Header from './Components/Header'
 import ListadoGastos from './Components/ListadoGastos'
@@ -23,6 +23,27 @@ function App() {
       setanimarModal(true)
     }, 300);
   }
+
+  useEffect(() => {
+    if (presupuesto !== 0) {
+      localStorage.setItem('presupuesto', presupuesto)
+    }
+    localStorage.setItem('totalGastado', totalGastado)
+    if (Change == true) {
+      localStorage.setItem('change', Change)
+    }
+
+  }, [presupuesto, Change, totalGastado])
+
+  useEffect(() => {
+    console.log(
+      Number(localStorage.getItem('presupuesto'))
+    )
+
+  }, [])
+
+
+
   return (
     <div className={isModalActive ? 'fijar' : ''}>
       <Header setChange={setChange} Change={Change} mensaje={mensaje} setmessage={setmessage} gastos={gastos} presupuesto={presupuesto} setpresupuesto={setpresupuesto} totalGastado={totalGastado} settotalGastado={settotalGastado} />
