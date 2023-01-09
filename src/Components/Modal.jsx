@@ -94,7 +94,7 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
         {mensaje && <Mensaje tipo='error'>{mensaje}</Mensaje>}
         <div className='campo'>
           <label htmlFor="nombre">Nombre Gasto</label>
-          <input type="text" id='nombre' required placeholder='Añade el nombre del Gasto' />
+          <input type="text" id='nombre' min={1} required placeholder='Añade el nombre del Gasto' />
         </div>
         <div className='campo'>
           <label htmlFor="cantidad">Cantidad</label>

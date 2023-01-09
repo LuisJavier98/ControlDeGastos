@@ -25,22 +25,21 @@ function App() {
   }
 
   useEffect(() => {
-    if (presupuesto !== 0) {
-      localStorage.setItem('presupuesto', presupuesto)
+    if (localStorage.getItem('change') == false) {
+      setChange(false)
     }
-    localStorage.setItem('totalGastado', totalGastado)
-    if (Change == true) {
-      localStorage.setItem('change', Change)
-    }
-
-  }, [presupuesto, Change, totalGastado])
-
-  useEffect(() => {
-    console.log(
-      Number(localStorage.getItem('presupuesto'))
-    )
+    console.log(Change)
 
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('presupuesto', presupuesto)
+    localStorage.setItem('totalGastado', totalGastado)
+    localStorage.setItem('change', Change)
+
+
+
+  }, [presupuesto, Change, totalGastado])
 
 
 
