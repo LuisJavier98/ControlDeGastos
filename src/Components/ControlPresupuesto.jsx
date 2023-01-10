@@ -10,6 +10,7 @@ const ControlPresupuesto = ({ presupuesto, gastos, setgastos, setpresupuesto, to
     })
   }
 
+
   const handleReset = () => {
     const resultado = confirm('¿Deseas reiniciar presupuesto y gastos?')
     if (resultado) {
@@ -32,15 +33,12 @@ const ControlPresupuesto = ({ presupuesto, gastos, setgastos, setpresupuesto, to
 
   return (
     <div className='contenedor-presupuesto contenedor sombra dos-columnas' >
-      <div>
+      <div >
         <CircularProgressbar
           value={(totalGastado / presupuesto) * 100}
+          circleRatio='1'
+          strokeWidth='9'
           text={`${((totalGastado / presupuesto) * 100).toFixed(2)}% Gastado`}
-          styles={buildStyles({
-            background: '#181818',
-            textColor: 'red',
-            pathColor: 'red'
-          })}
         />
       </div>
       <div className='contenido-presupuesto'>

@@ -14,7 +14,7 @@ function App() {
   const [gastos, setgastos] = useState(JSON.parse(localStorage.getItem('gastos')) ?? [])
   const [mensaje, setmessage] = useState()
   const [editarGasto, seteditarGasto] = useState({})
-  const [presupuesto, setpresupuesto] = useState(localStorage.getItem('presupuesto') ?? 0)
+  const [presupuesto, setpresupuesto] = useState(Number(localStorage.getItem('presupuesto')) ?? 0)
   const [totalGastado, settotalGastado] = useState(0)
   const [filtro, setfiltro] = useState('todos')
 
@@ -27,7 +27,7 @@ function App() {
   }
 
   useEffect(() => {
-    localStorage.setItem('presupuesto', presupuesto ?? 0)
+    localStorage.setItem('presupuesto', (presupuesto) ?? 0)
     localStorage.setItem('gastos', JSON.stringify(gastos))
   }, [presupuesto, gastos])
 
@@ -45,7 +45,7 @@ function App() {
         <>
           <main>
             <Filtros filtro={filtro} setfiltro={setfiltro} />
-            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} filtro={filtro} setanimarModal={setanimarModal} />
+            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} filtro={filtro} handleNuevoGasto={handleNuevoGasto} />
           </main>
           <div className='nuevo-gasto'>
             <img src={IconoNuevoGasto} alt="Icono nuevo gasto" onClick={handleNuevoGasto} />

@@ -5,6 +5,16 @@
   --gris: #94a3b8;
   --gris-oscuro: #64748b;
   --negro: #000;
+  --h1: 2.3rem;
+  --h2: 2rem;
+  --resetApp: 1rem;
+  --contenidoPresupuestoP: 1rem;
+  --filtroLabel: 2rem;
+  --descripcionGastoCategoria: 1rem;
+  --descripcionGastoNombre: 1.6rem;
+  --descripcionGastoFecha: 1.2rem;
+  --cantidadGasto: 1.5rem;
+  --padding: 0rem
 }
 
 body {
@@ -30,11 +40,11 @@ html {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: var(--h1);
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: var(--h2);
 }
 
 .sombra {
@@ -42,7 +52,7 @@ h2 {
   -webkit-box-shadow: 0px 9px 10px -10px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: 0px 9px 10px -10px rgba(0, 0, 0, 0.51);
   background-color: var(--blanco);
-  padding: 4rem;
+  padding: 5rem var(--padding);
   border-radius: 1.2rem;
 }
 
@@ -65,7 +75,61 @@ header h1 {
   padding: 10rem 0;
 }
 
+
+
+@media (min-width:330px) {
+  :root {
+    --h1: 3rem;
+    --h2: 2.5rem;
+    --resetApp: 1.5rem;
+    --contenidoPresupuestoP: 1.5rem;
+    --filtroLabel: 2rem;
+    --descripcionGastoCategoria: 1.5rem;
+    --descripcionGastoNombre: 2.5rem;
+    --descripcionGastoFecha: 2rem;
+    --cantidadGasto: 2rem
+  }
+}
+
+@media (min-width:470px) {
+  :root {
+    --resetApp: 2rem;
+    --contenidoPresupuestoP: 2rem;
+    --filtroLabel: 2.5rem;
+    --descripcionGastoCategoria: 2rem;
+    --descripcionGastoNombre: 2.3rem;
+    --descripcionGastoFecha: 2rem;
+
+  }
+}
+
+@media (min-width:600px) {
+  :root {
+    --h1: 3.5rem;
+    --h2: 3rem;
+    --resetApp: 2.2rem;
+    --contenidoPresupuestoP: 2.5rem;
+    --filtroLabel: 3rem;
+    --descripcionGastoCategoria: 2rem;
+    --descripcionGastoNombre: 2.6rem;
+    --descripcionGastoFecha: 2.2rem;
+  }
+}
+
+
 @media (min-width: 768px) {
+
+  :root {
+    --h1: 4rem;
+    --h2: 3.5rem;
+    --resetApp: 2.5rem;
+    --contenidoPresupuestoP: 2.5rem;
+    --descripcionGastoCategoria: 2.5rem;
+    --descripcionGastoNombre: 2.5rem;
+    --padding: 6rem
+  }
+
+
   .formulario {
     padding: 5rem 0;
     width: 60rem;
@@ -119,6 +183,7 @@ header h1 {
   transition: background-color 300ms ease;
 }
 
+
 @media (min-width: 768px) {
   .formulario input[type="submit"] {
     display: block;
@@ -162,15 +227,14 @@ header h1 {
   width: 90%;
   max-width: 80rem;
   margin: 0 auto;
+  padding: 5%;
 }
 
 .contenedor-presupuesto {
   margin-top: -5rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   transform: translateY(5rem);
 }
 
@@ -179,7 +243,7 @@ header h1 {
 }
 
 .dos-columnas :first-child {
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -205,8 +269,9 @@ header h1 {
 }
 
 .contenedor-presupuesto svg {
-  width: 25rem;
+  width: 100%;
 }
+
 
 .contenido-presupuesto {
   width: 100%;
@@ -215,9 +280,10 @@ header h1 {
 .contenido-presupuesto p {
   font-weight: 400;
   color: var(--gris-oscuro);
-  font-size: 2.4rem;
+  font-size: var(--contenidoPresupuestoP);
   text-align: center;
 }
+
 
 @media (min-width: 768px) {
   .contenido-presupuesto p {
@@ -247,6 +313,7 @@ header h1 {
   border-radius: 1rem;
   transition-property: background-color;
   transition-duration: 300ms;
+  font-size: var(--resetApp);
 }
 
 .reset-app:hover {
@@ -258,14 +325,19 @@ main {
   padding-top: 10rem;
 }
 
+.campo label {
+  margin: auto auto;
+}
+
 .filtros .campo {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .filtros label {
-  font-size: 3rem;
+  font-size: var(--filtroLabel);
   font-weight: 900;
   color: var(--gris-oscuro);
 }
@@ -277,6 +349,7 @@ main {
   border-radius: 1rem;
   text-align: center;
   background-color: var(--gris-claro);
+  min-width: 100%;
 }
 
 .listado-gastos {
@@ -295,6 +368,7 @@ main {
 
 .gasto {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
@@ -302,20 +376,31 @@ main {
   width: 100%;
 }
 
+.gasto img {
+  margin: auto auto;
+}
+
 .cantidad-gasto {
-  font-size: 2.4rem;
+  font-size: var(--cantidadGasto);
   color: var(--negro);
   font-weight: 900;
+  margin: auto auto;
+
 }
 
 .contenido-gasto {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .contenido-gasto img {
   width: 10rem;
+}
+
+.descripcion-gasto {
+  margin: auto auto;
 }
 
 .descripcion-gasto p {
@@ -324,7 +409,7 @@ main {
 
 .descripcion-gasto .categoria {
   color: var(--gris);
-  font-size: 1.6rem;
+  font-size: var(--descripcionGastoCategoria);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -335,7 +420,7 @@ main {
 
 .descripcion-gasto .nombre-gasto {
   color: var(--gris-oscuro);
-  font-size: 2.4rem;
+  font-size: var(--descripcionGastoNombre);
   font-weight: 700;
 }
 
@@ -344,7 +429,7 @@ main {
 }
 
 .descripcion-gasto .fecha-gasto {
-  font-size: 1.8rem;
+  font-size: var(--descripcionGastoFecha);
   font-weight: 900;
   color: var(--gris-oscuro);
 }
@@ -393,7 +478,6 @@ main {
 
 .modal .formulario {
   max-width: 80rem;
-  width: 40rem;
   transition-property: all;
   transition-duration: 300ms;
   transition-timing-function: ease-in;
@@ -423,6 +507,7 @@ body .modal {
 
 .CircularProgressbar .CircularProgressbar-text {
   font-size: 1rem !important;
+
 }
 
 /*** SWIPE LIST OVERRIDES **/
