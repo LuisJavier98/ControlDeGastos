@@ -25,8 +25,6 @@ function App() {
       setanimarModal(true)
     }, 300);
   }
-  console.log(gastos, filtro)
-
 
   useEffect(() => {
     localStorage.setItem('presupuesto', presupuesto ?? 0)
@@ -47,7 +45,7 @@ function App() {
         <>
           <main>
             <Filtros filtro={filtro} setfiltro={setfiltro} />
-            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} filtro={filtro} />
+            <ListadoGastos gastos={gastos} seteditarGasto={seteditarGasto} setisModalActive={setisModalActive} setgastos={setgastos} filtro={filtro} setanimarModal={setanimarModal} />
           </main>
           <div className='nuevo-gasto'>
             <img src={IconoNuevoGasto} alt="Icono nuevo gasto" onClick={handleNuevoGasto} />

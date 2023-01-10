@@ -10,7 +10,7 @@ import "react-swipeable-list/dist/styles.css"
 import { formatearFecha, images } from '../Helpers'
 
 
-const Gastos = ({ gasto, seteditarGasto, setisModalActive, gastos, setgastos }) => {
+const Gastos = ({ gasto, seteditarGasto, setisModalActive, gastos, setgastos, setanimarModal }) => {
   const i = images.find(image => image.split('_')[1].split(".")[0] == gasto.categoria)
 
   const leadingActions = () => (
@@ -18,6 +18,7 @@ const Gastos = ({ gasto, seteditarGasto, setisModalActive, gastos, setgastos }) 
       <SwipeAction onClick={() => {
         seteditarGasto(gasto)
         setisModalActive(true)
+        setanimarModal(true)
       }}  >
         Editar
       </SwipeAction>
