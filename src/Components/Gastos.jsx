@@ -7,11 +7,20 @@ import {
   TrailingActions
 } from "react-swipeable-list"
 import "react-swipeable-list/dist/styles.css"
-import { formatearFecha, images } from '../Helpers'
+import { formatearFecha } from '../Helpers'
+import ahorro from '../img/icono_ahorro.svg'
+import casa from '../img/icono_casa.svg'
+import comida from '../img/icono_comida.svg'
+import gast from '../img/icono_gastos.svg'
+import ocio from '../img/icono_ocio.svg'
+import salud from '../img/icono_salud.svg'
+import suscripciones from '../img/icono_suscripciones.svg'
 
 
 const Gastos = ({ gasto, seteditarGasto, setisModalActive, gastos, setgastos, handleNuevoGasto }) => {
-  const i = images.find(image => image.split('_')[1].split(".")[0] == gasto.categoria)
+  const iconos = {
+    ahorro, casa, comida, gast, ocio, salud, suscripciones
+  }
 
   const leadingActions = () => (
     <LeadingActions>
@@ -42,7 +51,7 @@ const Gastos = ({ gasto, seteditarGasto, setisModalActive, gastos, setgastos, ha
         trailingActions={trailingActions()}>
         <div className='gasto sombra'>
           <div className='contenido-gasto'>
-            <img src={i} alt={gasto.categoria} />
+            <img src={iconos[gasto.categoria]} alt={gasto.categoria} />
             <div className='descripcion-gasto'>
               <p className='categoria'>{gasto.categoria}</p>
               <p className='nombre-gasto'>{gasto.nombreGasto}</p>
