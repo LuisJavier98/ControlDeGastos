@@ -24,6 +24,16 @@ function App() {
     setTimeout(() => {
       setanimarModal(true)
     }, 300);
+    scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  if (isModalActive) {
+    window.onscroll = function () { scrollTo({ top: 0 }) }
+  } else {
+    window.onscroll = function () { }
   }
 
   useEffect(() => {

@@ -85,7 +85,7 @@ const Modal = ({ setisModalActive, animarModal, setanimarModal, gastos, setgasto
 
 
   return (
-    <div className='modal'>
+    <div className='modal' >
       <div className='cerrar-modal'>
         <img src={CerrarBtn} alt="Cerrar modal" onClick={ocultarModal} />
       </div>

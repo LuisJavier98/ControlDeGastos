@@ -35,9 +35,10 @@ html {
 }
 
 .fijar {
-  overflow: hidden;
+  overflow-y: hidden;
   height: 100vh;
 }
+
 
 h1 {
   font-size: var(--h1);
@@ -65,13 +66,12 @@ header h1 {
   margin: 0;
   color: var(--blanco);
   text-align: center;
-
   text-transform: uppercase;
 }
 
 .formulario {
   width: 95%;
-  margin: 0 auto;
+  margin: auto auto;
   padding: 10rem 0;
 }
 
@@ -137,7 +137,7 @@ header h1 {
 }
 
 .formulario legend {
-  font-size: 3.6rem;
+  font-size: var(--h1);
   text-align: center;
   display: block;
   text-transform: uppercase;
@@ -328,6 +328,7 @@ main {
 
 .campo label {
   margin: auto auto;
+  font-size: var(--h2);
 }
 
 .filtros .campo {
@@ -336,6 +337,15 @@ main {
   gap: 2rem;
   flex-wrap: wrap;
 }
+
+.campo input {
+  font-size: var(--cantidadGasto);
+}
+
+.campo select {
+  font-size: var(--cantidadGasto);
+}
+
 
 .filtros label {
   font-size: var(--filtroLabel);
@@ -441,12 +451,14 @@ main {
 
 .nuevo-gasto {
   position: fixed;
-  bottom: 5rem;
-  right: 5rem;
+  bottom: 5%;
+  right: 5%;
+  width: 7%;
 }
 
 .nuevo-gasto img {
   width: 5rem;
+  width: 100%;
 }
 
 .nuevo-gasto img:hover {
@@ -460,6 +472,7 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
+  height: 100vh;
 }
 
 .modal .cerrar-modal {
@@ -470,6 +483,7 @@ main {
   height: 3rem;
   cursor: pointer;
   z-index: 5;
+  width: 3%;
 }
 
 .modal .cerrar-modal img {
@@ -485,6 +499,7 @@ main {
   opacity: 0;
 }
 
+
 .modal label {
   color: var(--blanco);
 }
@@ -499,6 +514,7 @@ body .modal {
 }
 
 .modal .formulario.cerrar {
+  position: relative;
   opacity: 0;
 }
 
