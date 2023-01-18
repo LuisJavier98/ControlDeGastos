@@ -21,7 +21,7 @@ const Header = ({ Change, setChange, mensaje, setmessage, gastos, setgastos, pre
   }
   return (
     <header>
-      <h1>Panificador de Gastos</h1>{
+      <h1>Planificador de Gastos</h1>{
         Change ?
           <NuevoPresupuesto setpresupuesto={setpresupuesto} mensaje={mensaje} handleChange={handleChange} /> :
           <ControlPresupuesto presupuesto={presupuesto} gastos={gastos} setgastos={setgastos} setpresupuesto={setpresupuesto} totalGastado={totalGastado} settotalGastado={settotalGastado} setChange={setChange} />}
